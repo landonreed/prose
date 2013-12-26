@@ -43,6 +43,7 @@ LIBS = \
 	vendor/codemirror/xml.js \
 	vendor/codemirror/javascript.js \
 	vendor/codemirror/css.js \
+	vendor/codemirror/csv.js \
 	vendor/codemirror/gfm.js \
 	vendor/liquid.js
 

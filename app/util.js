@@ -62,6 +62,7 @@ module.exports = {
     if (this.isMarkdown(extension)) return 'gfm';
     if (_.include(['js', 'json'], extension)) return 'javascript';
     if (extension === 'html') return 'htmlmixed';
+    if (extension === 'csv') return 'csv';
     if (extension === 'rb') return 'ruby';
     if (/(yml|yaml)/.test(extension)) return 'yaml';
     if (_.include(['java', 'c', 'cpp', 'cs', 'php'], extension)) return 'clike';

@@ -1,10 +1,11 @@
-CodeMirror.defineMode("gfm", function(config) {
+CodeMirror.defineMode("csv", function(config) {
   var codeDepth = 0;
   function blankLine(state) {
     state.code = false;
     return null;
   }
-  var gfmOverlay = {
+  console.log('is this csv??')
+  var csvOverlay = {
     startState: function() {
       return {
         code: false,
@@ -84,13 +85,23 @@ CodeMirror.defineMode("gfm", function(config) {
       stream.next();
       return null;
     },
-    blankLine: blankLine
+    indent: function(state, textAfter) {
+      if (state || /[^,\n]+[,\n]|[,]/.test(textAfter))
+        return htmlMode.indent(state.htmlState, textAfter);
+      else if (state.localMode.indent)
+        return state.localMode.indent(state.localState, textAfter);
+      else
+        return CodeMirror.Pass;
+    },//[^,\n]+[,\n]|[,]
+    blankLine: function() {
+      return "blank!";
+    }
   };
-  CodeMirror.defineMIME("gfmBase", {
+  CodeMirror.defineMIME("csvBase", {
     name: "markdown",
     underscoresBreakWords: false,
     taskLists: true,
     fencedCodeBlocks: true
   });
-  return CodeMirror.overlayMode(CodeMirror.getMode(config, "gfmBase"), gfmOverlay);
-});
+  return CodeMirror.overlayMode(CodeMirror.getMode(config, "csvBase"), csvOverlay);
+}, "markdown");

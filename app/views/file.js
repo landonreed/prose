@@ -293,7 +293,7 @@ module.exports = Backbone.View.extend({
     this.editor = CodeMirror(this.$el.find('#code')[0], {
       mode: lang,
       value: this.model.get('content') || '',
-      lineWrapping: true,
+      lineWrapping: true ? lang != 'csv' : false,
       lineNumbers: (lang === 'gfm' || lang === null) ? false : true,
       extraKeys: this.keyMap(),
       matchBrackets: true,
